@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h2>Apresentações</h2>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="{{ url_for('adicionar_apresentacao') }}" class="row g-3 mb-4">
+      <div class="col-md-3">
+        <input type="text" name="nome_evento" class="form-control" placeholder="Nome do Evento" required>
+      </div>
+      <div class="col-md-2">
+        <input type="date" name="data" class="form-control" required>
+      </div>
+      <div class="col-md-3">
+        <input type="text" name="local" class="form-control" placeholder="Local" required>
+      </div>
+      <div class="col-md-2">
+        <input type="text" name="tema" class="form-control" placeholder="Tema (opcional)">
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+      </div>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Evento</th>
+          <th>Data</th>
+          <th>Local</th>
+          <th>Tema</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in apresentacoes %}
+        <tr>
+          <td>{{ a[0] }}</td>
+          <td>{{ a[1] }}</td>
+          <td>{{ a[2] }}</td>
+          <td>{{ a[3] }}</td>
+          <td>{{ a[4] or '-' }}</td>
+          <td>
+            <a href="{{ url_for('remover_apresentacao', id=a[0]) }}" class="btn btn-danger btn-sm"
+               onclick="return confirm('Deseja excluir esta apresentação?')">Excluir</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
