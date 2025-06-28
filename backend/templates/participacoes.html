@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h2>Participações</h2>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="{{ url_for('adicionar_participacao') }}" class="row g-3 mb-4">
+      <div class="col-md-2">
+        <input type="number" name="aluno_id" class="form-control" placeholder="ID Aluno" required>
+      </div>
+      <div class="col-md-2">
+        <input type="number" name="turma_id" class="form-control" placeholder="ID Turma" required>
+      </div>
+      <div class="col-md-2">
+        <input type="number" name="professor_id" class="form-control" placeholder="ID Professor" required>
+      </div>
+      <div class="col-md-3">
+        <input type="date" name="data_inicio" class="form-control" required>
+      </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+      </div>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Aluno</th>
+          <th>Turma</th>
+          <th>Professor</th>
+          <th>Início</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in participacoes %}
+        <tr>
+          <td>{{ p[0] }}</td>
+          <td>{{ p[1] }}</td>
+          <td>{{ p[2] }}</td>
+          <td>{{ p[3] }}</td>
+          <td>{{ p[4] }}</td>
+          <td>
+            <a href="{{ url_for('remover_participacao', id=p[0]) }}" class="btn btn-danger btn-sm"
+               onclick="return confirm('Deseja excluir esta participação?')">Excluir</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

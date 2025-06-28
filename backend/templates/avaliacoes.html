@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h2>Avaliações</h2>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="{{ url_for('adicionar_avaliacao') }}" class="row g-3 mb-4">
+      <div class="col-md-2">
+        <input type="number" name="aluno_id" class="form-control" placeholder="ID do Aluno" required>
+      </div>
+      <div class="col-md-2">
+        <input type="number" name="nota" step="0.1" class="form-control" placeholder="Nota" required>
+      </div>
+      <div class="col-md-4">
+        <input type="text" name="comentario" class="form-control" placeholder="Comentário" required>
+      </div>
+      <div class="col-md-2">
+        <input type="date" name="data_avaliacao" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Avaliar</button>
+      </div>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Aluno ID</th>
+          <th>Nota</th>
+          <th>Comentário</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for av in avaliacoes %}
+        <tr>
+          <td>{{ av[1] }}</td>
+          <td>{{ av[2] }}</td>
+          <td>{{ av[3] }}</td>
+          <td>{{ av[4] or '-' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

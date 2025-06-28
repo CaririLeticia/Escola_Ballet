@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h2>Turmas</h2>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="{{ url_for('adicionar_turma') }}" class="row g-3 mb-4">
+      <div class="col-md-3">
+        <input type="text" name="nivel" class="form-control" placeholder="Nível (iniciante...)" required>
+      </div>
+      <div class="col-md-3">
+        <input type="text" name="horario" class="form-control" placeholder="Horário" required>
+      </div>
+      <div class="col-md-3">
+        <input type="text" name="sala" class="form-control" placeholder="Sala" required>
+      </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+      </div>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nível</th>
+          <th>Horário</th>
+          <th>Sala</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in turmas %}
+        <tr>
+          <td>{{ t[0] }}</td>
+          <td>{{ t[1] }}</td>
+          <td>{{ t[2] }}</td>
+          <td>{{ t[3] }}</td>
+          <td>
+            <a href="{{ url_for('remover_turma', id=t[0]) }}" class="btn btn-danger btn-sm"
+               onclick="return confirm('Deseja excluir esta turma?')">Excluir</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
