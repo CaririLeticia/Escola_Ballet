@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% block content %}
 <div class="card">
@@ -54,4 +55,62 @@
         </table>
     </div>
 </div>
+
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Alunos</h2>
+    </div>
+    <div class="card-body">
+        <!-- Formulário de Cadastro -->
+        <form method="POST" action="{{ url_for('adicionar_aluno') }}" class="mb-4">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" name="nome" class="form-control" placeholder="Nome" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="date" name="data_nascimento" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Tabela de Alunos -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Data Nasc.</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aluno in alunos %}
+                <tr>
+                    <td>{{ aluno[0] }}</td>
+                    <td>{{ aluno[1] }}</td>
+                    <td>{{ aluno[2] }}</td>
+                    <td>{{ aluno[3] }}</td>
+                    <td>
+                        <a href="{{ url_for('remover_aluno', id=aluno[0]) }}" 
+                           class="btn btn-danger btn-sm" 
+                           onclick="return confirm('Tem certeza?')">
+                            Excluir
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {% endblock %}

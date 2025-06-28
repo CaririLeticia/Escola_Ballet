@@ -1,3 +1,4 @@
+
 body {
     background-color: #f8f9fa;
 }
@@ -7,4 +8,15 @@ body {
 }
 .table th {
     background-color: #e9ecef;
+
+body {
+    background-color: #f8f9fa;
+}
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.table th {
+    background-color: #e9ecef;
+
 }

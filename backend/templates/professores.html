@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% block content %}
 <div class="card">
@@ -39,3 +40,46 @@
   </div>
 </div>
 {% endblock %}
+
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h2>Professores</h2>
+    <form method="POST" action="{{ url_for('adicionar_professor') }}" class="d-flex">
+      <input type="text" name="nome" placeholder="Nome" class="form-control me-2" required>
+      <input type="text" name="especialidade" placeholder="Especialidade" class="form-control me-2" required>
+      <input type="email" name="email" placeholder="Email" class="form-control me-2" required>
+      <button type="submit" class="btn btn-success">Adicionar</button>
+    </form>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Especialidade</th>
+          <th>Email</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in professores %}
+        <tr>
+          <td>{{ p[0] }}</td>
+          <td>{{ p[1] }}</td>
+          <td>{{ p[2] }}</td>
+          <td>{{ p[3] }}</td>
+          <td>
+            <a href="{{ url_for('remover_professor', id=p[0]) }}" class="btn btn-danger btn-sm"
+               onclick="return confirm('Deseja excluir este professor?')">Excluir</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
