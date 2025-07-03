@@ -1,9 +1,11 @@
 from db.connection import conectar
+import os
 
 def criar_tabelas():
     conn = conectar()
     cursor = conn.cursor()
-    with open("db/schema.sql", "r") as f:
+    caminho_schema = os.path.join(os.path.dirname(__file__), "db", "schema.sql")
+    with open(caminho_schema, "r", encoding="utf-8") as f:
         cursor.executescript(f.read())
     conn.commit()
     conn.close()

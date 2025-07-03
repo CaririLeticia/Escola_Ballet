@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% block content %}
 <div class="card">
@@ -9,17 +8,25 @@
         <!-- Formulário de Cadastro -->
         <form method="POST" action="{{ url_for('adicionar_aluno') }}" class="mb-4">
             <div class="row g-3">
-                <div class="col-md-4">
-                    <input type="text" name="nome" class="form-control" placeholder="Nome" required>
-                </div>
                 <div class="col-md-3">
-                    <input type="date" name="data_nascimento" class="form-control" required>
-                </div>
-                <div class="col-md-3">
-                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                <input type="text" name="nome" class="form-control" placeholder="Nome" required>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+                <input type="date" name="data_nascimento" class="form-control" required>
+                </div>
+                <div class="col-md-2">
+                <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="col-md-3">
+                <select name="turma_id" class="form-control">
+                    <option value="">Selecione a Turma</option>
+                    {% for t in turmas %}
+                    <option value="{{ t[0] }}">{{ t[1] }} - {{ t[2] }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+                <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Adicionar</button>
                 </div>
             </div>
         </form>
@@ -32,6 +39,7 @@
                     <th>Nome</th>
                     <th>Data Nasc.</th>
                     <th>Email</th>
+                    <th>Turma</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -42,6 +50,7 @@
                     <td>{{ aluno[1] }}</td>
                     <td>{{ aluno[2] }}</td>
                     <td>{{ aluno[3] }}</td>
+                    <td>{{ aluno[4] or 'Sem turma' }}</td>
                     <td>
                         <a href="{{ url_for('remover_aluno', id=aluno[0]) }}" 
                            class="btn btn-danger btn-sm" 
@@ -55,62 +64,4 @@
         </table>
     </div>
 </div>
-
-{% extends "base.html" %}
-{% block content %}
-<div class="card">
-    <div class="card-header">
-        <h2>Alunos</h2>
-    </div>
-    <div class="card-body">
-        <!-- Formulário de Cadastro -->
-        <form method="POST" action="{{ url_for('adicionar_aluno') }}" class="mb-4">
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <input type="text" name="nome" class="form-control" placeholder="Nome" required>
-                </div>
-                <div class="col-md-3">
-                    <input type="date" name="data_nascimento" class="form-control" required>
-                </div>
-                <div class="col-md-3">
-                    <input type="email" name="email" class="form-control" placeholder="Email" required>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">Adicionar</button>
-                </div>
-            </div>
-        </form>
-
-        <!-- Tabela de Alunos -->
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Data Nasc.</th>
-                    <th>Email</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for aluno in alunos %}
-                <tr>
-                    <td>{{ aluno[0] }}</td>
-                    <td>{{ aluno[1] }}</td>
-                    <td>{{ aluno[2] }}</td>
-                    <td>{{ aluno[3] }}</td>
-                    <td>
-                        <a href="{{ url_for('remover_aluno', id=aluno[0]) }}" 
-                           class="btn btn-danger btn-sm" 
-                           onclick="return confirm('Tem certeza?')">
-                            Excluir
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-
 {% endblock %}
