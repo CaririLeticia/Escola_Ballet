@@ -7,13 +7,34 @@
   <div class="card-body">
     <form method="POST" action="{{ url_for('adicionar_turma') }}" class="row g-3 mb-4">
       <div class="col-md-3">
-        <input type="text" name="nivel" class="form-control" placeholder="Nível (iniciante...)" required>
+        <select name="nivel" class="form-select" required>
+          <option value="">Selecione o nível</option>
+          <option value="Iniciante">Iniciante</option>
+          <option value="Intermediário">Intermediário</option>
+          <option value="Avançado">Avançado</option>
+        </select>        
       </div>
       <div class="col-md-3">
-        <input type="text" name="horario" class="form-control" placeholder="Horário" required>
+        <select name="horario" class="form-select" required>
+          <option value="">Selecione o horário</option>
+          <option value="16h">16h</option>
+          <option value="17h">17h</option>
+          <option value="18h">18h</option>
+          <option value="19h">19h</option>
+          <option value="20h">20h</option>
+          <option value="21h">21h</option>
+        </select>
       </div>
       <div class="col-md-3">
-        <input type="text" name="sala" class="form-control" placeholder="Sala" required>
+        <select name="sala" class="form-select" required>
+          <option value="">Selecione a sala</option>
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
+        </select>
       </div>
       <div class="col-md-3">
         <button type="submit" class="btn btn-primary w-100">Adicionar</button>

@@ -1,23 +1,64 @@
-
 body {
-    background-color: #f8f9fa;
-}
-.card {
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.table th {
-    background-color: #e9ecef;
+    background-color: #fff0f5; /* rosa muito claro */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-    background-color: #f8f9fa;
+.navbar {
+    background-color: #ffb6c1 !important; /* rosa suave */
 }
-.card {
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.table th {
-    background-color: #e9ecef;
 
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: white !important;
+    font-weight: bold;
+}
+
+.card {
+    border-radius: 20px;
+    border: none;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px rgba(255, 182, 193, 0.3); /* rosa claro */
+}
+
+.card-header {
+    background-color: #ffe6e9;
+    border-bottom: 2px solid #f8d7da;
+    border-radius: 20px 20px 0 0;
+}
+
+.table th {
+    background-color: #f8d7da;
+    color: #333;
+    font-weight: bold;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fff5f7;
+}
+
+.btn-primary {
+    background-color: #ff69b4;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #ff85c1;
+}
+
+.btn-danger {
+    background-color: #e57373;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #ef5350;
+}
+
+.btn-info {
+    background-color: #ba68c8;
+    border: none;
+}
+
+.btn-info:hover {
+    background-color: #ce93d8;
 }
