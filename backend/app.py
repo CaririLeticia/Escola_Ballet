@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from models.aluno import inserir_aluno, deletar_aluno, listar_alunos
 from models.professor import inserir_professor, deletar_professor, listar_professores
 from models.turma import inserir_turma, deletar_turma, listar_turmas
-from models.apresentacao import inserir_apresentacao, deletar_apresentacao, listar_apresentacoes
+from models.coreografia import inserir_coreografia, deletar_coreografia, listar_coreografias, atualizar_coreografia
 from models.avaliacao import inserir_avaliacao, listar_avaliacoes
 from models.participacao import inserir_participacao, deletar_participacao, listar_participacoes
 from db.connection import conectar
@@ -98,24 +98,55 @@ def visualizar_turma(id):
     return render_template('turma_detalhes.html', turma=turma, professor=professor, alunos=alunos)
 
 # ---------- APRESENTAÇÕES ----------
-@app.route('/apresentacoes')
-def mostrar_apresentacoes():
-    apresentacoes = listar_apresentacoes()
-    return render_template('apresentacoes.html', apresentacoes=apresentacoes)
+@app.route('/coreografias')
+def mostrar_coreografias():
+    coreografias = listar_coreografias()
+    turmas = listar_turmas()
+    return render_template('coreografias.html', coreografias=coreografias, turmas=turmas)
 
-@app.route('/apresentacoes/novo', methods=['POST'])
-def adicionar_apresentacao():
+@app.route('/coreografias/novo', methods=['POST'])
+def adicionar_coreografia():
+    nome_evento = request.form['nome_evento']
+    data = request.form['data']
+    local = request.form['local']
+    turma_id = request.form.get('turma_id') or None
+    tema = request.form.get('tema')
+    descricao = request.form.get('descricao')
+    inserir_coreografia(nome_evento, data, local, turma_id, tema, descricao)
+    return redirect(url_for('mostrar_coreografias'))
+
+@app.route('/coreografias/deletar/<int:id>')
+def remover_coreografia(id):
+    deletar_coreografia(id)
+    return redirect(url_for('mostrar_coreografias'))
+
+@app.route('/coreografias/editar/<int:id>')
+def editar_coreografia(id):
+    conn = conectar()
+    cursor = conn.cursor()
+
+    # Buscar coreografia
+    cursor.execute("SELECT * FROM Coreografia WHERE id = ?", (id,))
+    coreografia = cursor.fetchone()
+
+    # Buscar turmas disponíveis
+    cursor.execute("SELECT id, nivel, horario FROM Turma")
+    turmas = cursor.fetchall()
+
+    conn.close()
+    return render_template('editar_coreografia.html', coreografia=coreografia, turmas=turmas)
+
+@app.route('/coreografias/editar/<int:id>', methods=['POST'])
+def salvar_edicao_coreografia(id):
     nome_evento = request.form['nome_evento']
     data = request.form['data']
     local = request.form['local']
     tema = request.form.get('tema')
-    inserir_apresentacao(nome_evento, data, local, tema)
-    return redirect(url_for('mostrar_apresentacoes'))
+    descricao = request.form.get('descricao')
+    turma_id = request.form.get('turma_id') or None
 
-@app.route('/apresentacoes/deletar/<int:id>')
-def remover_apresentacao(id):
-    deletar_apresentacao(id)
-    return redirect(url_for('mostrar_apresentacoes'))
+    atualizar_coreografia(id, nome_evento, data, local, tema, descricao, turma_id)
+    return redirect(url_for('mostrar_coreografias'))
 
 # ---------- AVALIAÇÕES ----------
 @app.route('/avaliacoes')

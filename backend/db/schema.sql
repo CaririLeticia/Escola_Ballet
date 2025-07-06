@@ -31,13 +31,15 @@ CREATE TABLE IF NOT EXISTS Turma (
 );
 
 -- Tabela Apresentacao
-CREATE TABLE IF NOT EXISTS Apresentacao (
+CREATE TABLE Coreografia (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome_evento TEXT NOT NULL,
-    data DATE NOT NULL,
+    data TEXT NOT NULL,
     local TEXT NOT NULL,
     tema TEXT,
-    descricao TEXT
+    descricao TEXT,
+    turma_id INTEGER,
+    FOREIGN KEY (turma_id) REFERENCES Turma(id)
 );
 
 -- Tabela Avaliacao

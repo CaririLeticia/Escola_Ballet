@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h2>Coreografias</h2>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="{{ url_for('adicionar_coreografia') }}" class="row g-3 mb-4">
+      <div class="col-md-3">
+        <input type="text" name="nome_evento" class="form-control" placeholder="Nome da Coreografia" required>
+      </div>
+      <div class="col-md-2">
+        <input type="date" name="data" class="form-control" required>
+      </div>
+      <div class="col-md-2">
+        <input type="text" name="local" class="form-control" placeholder="Local" required>
+      </div>
+      <div class="col-md-2">
+        <select name="turma_id" class="form-control">
+          <option value="">Turma</option>
+          {% for t in turmas %}
+          <option value="{{ t[0] }}">{{ t[1] }} - {{ t[2] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-1">
+        <input type="text" name="tema" class="form-control" placeholder="Tema">
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+      </div>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Evento</th>
+          <th>Data</th>
+          <th>Local</th>
+          <th>Turma</th>
+          <th>Tema</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in coreografias %}
+        <tr>
+          <td>{{ c[1] }}</td>
+          <td>{{ c[2] }}</td>
+          <td>{{ c[3] }}</td>
+          <td>{{ c[7] ~ ' - ' ~ c[8] if c[7] else 'Sem turma' }}</td>
+          <td>{{ c[4] or '-' }}</td>
+          <td>
+            <a href="{{ url_for('remover_coreografia', id=c[0]) }}" class="btn btn-danger btn-sm"
+               onclick="return confirm('Deseja excluir esta coreografia?')">Excluir</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
