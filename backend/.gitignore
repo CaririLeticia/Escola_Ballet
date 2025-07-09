@@ -1,0 +1,26 @@
+# 🐍 Arquivos compilados do Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# 📦 Ambientes virtuais (caso use)
+venv/
+env/
+.venv/
+.env/
+
+# 💾 Banco de dados SQLite
+*.db
+
+# 🧪 Arquivos de testes temporários
+*.log
+
+# 🖥️ Arquivos do sistema
+desktop.ini
+.DS_Store
+Thumbs.db
+
+# 📁 IDEs
+.vscode/
+.idea/
+*.swp

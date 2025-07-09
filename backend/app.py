@@ -97,7 +97,7 @@ def visualizar_turma(id):
     conn.close()
     return render_template('turma_detalhes.html', turma=turma, professor=professor, alunos=alunos)
 
-# ---------- APRESENTAÇÕES ----------
+# ---------- COREOGRAFIAS ----------
 @app.route('/coreografias')
 def mostrar_coreografias():
     coreografias = listar_coreografias()
