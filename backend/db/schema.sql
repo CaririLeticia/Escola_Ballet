@@ -90,3 +90,9 @@ BEGIN
         datetime('now')
     );
 END;
+
+-- SELECT 
+SELECT * FROM Turma;
+
+-- DELETE 
+DELETE FROM Aluno WHERE id = 99; 
