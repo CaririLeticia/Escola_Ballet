@@ -61,3 +61,4 @@ def atualizar_niveis_em_lote(turmas_nivel):
         UPDATE Turma SET nivel = ? WHERE id = ?
     """, turmas_nivel)
     conn.commit()
+    conn.close()

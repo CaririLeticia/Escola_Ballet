@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS Turma (
     observacoes TEXT
 );
 
--- Tabela Apresentacao
+-- Tabela Coreografia
 CREATE TABLE IF NOT EXISTS Coreografia (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome_evento TEXT NOT NULL,
